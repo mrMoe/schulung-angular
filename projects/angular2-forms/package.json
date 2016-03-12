@@ -1,0 +1,34 @@
+{
+  "version": "1.0.0",
+  "name": "schulung",
+  "private": true,
+  "scripts": {
+    "lite": "lite-server",
+    "postinstall": "typings install",
+    "start": "npm run clean && concurrently \"npm run tsc:w\" \"npm run compass:watch\" \"npm run lite\"",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "typings": "typings",
+    "clean": "rimraf app/*.js app/*.map",
+    "compass": "compass compile",
+    "compass:watch": "compass watch"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "angular2": "latest",
+    "systemjs": "latest",
+    "es6-promise": "latest",
+    "es6-shim": "latest",
+    "reflect-metadata": "latest",
+    "rxjs": "latest",
+    "zone.js": "latest",
+    "bootstrap": "latest"
+  },
+  "devDependencies": {
+    "concurrently": "latest",
+    "lite-server": "latest",
+    "rimraf": "latest",
+    "typescript": "latest",
+    "typings": "latest"
+  }
+}

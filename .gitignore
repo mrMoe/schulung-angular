@@ -1,0 +1,14 @@
+.directory
+node_modules/
+.sass-cache/
+typings/
+
+**/app/*.css
+**/app/*.js
+**/app/*.map
+!**/app/*.mock.js
+
+*.suo
+*.user
+*.userosscache
+*.sln.docstates

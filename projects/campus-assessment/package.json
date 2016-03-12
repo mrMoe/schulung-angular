@@ -1,15 +1,15 @@
 {
   "version": "1.0.0",
-  "name": "schulung",
+  "name": "campus-assessment",
   "private": true,
   "scripts": {
-    "lite": "lite-server",
-    "postinstall": "typings install",
     "start": "npm run clean && concurrently \"npm run tsc:w\" \"npm run compass:watch\" \"npm run lite\"",
+    "postinstall": "typings install",
+    "lite": "lite-server",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "typings": "typings",
-    "clean": "rimraf app/*.js app/*.map",
+    "clean": "rimraf app/*.js app/*.map app/*.css",
     "compass": "compass compile",
     "compass:watch": "compass watch"
   },

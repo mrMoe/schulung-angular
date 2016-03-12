@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "name": "praesentation",
+  "private": true,
+  "dependencies": {
+    "font-awesome": "latest",
+    "reveal.js": "latest"
+  }
+}

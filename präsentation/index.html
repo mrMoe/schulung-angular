@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>angular.js - Eine Schulung der Redheads ltd.</title>
+
+		<meta name="description" content="Eine Schulung der redheads ltd. Erlangen für Einsteiger in das angular.js Framework">
+		<meta name="author" content="Moritz Herrmann <moritz.herrmann@redheads.de>">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="node_modules/reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="node_modules/reveal.js/css/theme/solarized.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="node_modules/reveal.js/lib/css/zenburn.css">
+		
+		<link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'node_modules/reveal.js/css/print/pdf.css' : 'node_modules/reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+                    <img src="images/AngularJS-large.png" alt="angular.js">
+                    <p>
+                        <small><a href="mailto:moritz.herrmann@redheads.de">Moritz Herrmann</a></small>
+                    </p>
+
+                    <aside class="notes">
+                        <ul>
+                        	<li>sehr persönliche erfahrungen</li>
+                        	<li>etwas andere Struktur als üblich</li>
+                        	<li>Aufbau der Schulung</li>
+                            <li>Theorie 0,5 bis 0,75</li>
+                            <li>Setup 0,5 bis 0,25</li>
+                            <li>Anwendung</li>
+                        </ul>
+                    </aside>
+				</section>
+
+				<section>
+					<section>
+						<h2>What's with the Fuzz</h2>
+						<img src="images/MinionStuart_175251_crop.jpg">
+					</section>
+					<section>
+                        <h3>Javascript Sucks <i class="fa fa-bug"></i></h3>
+                        <ul>
+                            <li>WTF's <a href="http://jswtf.tumblr.com/">jswtf.tumblr.com</a></li>
+                            <li>Skurille Scoping-Regeln (var vergessen -> globale Variable)</li>
+                            <li>Dynamische Sprache: this ändert sich dauernd</li>
+                            <li>Hat keine Klassen</li>
+                            <li>schlechte Tool-Unterstützung</li>
+                        </ul>
+                        <pre><code class="javascript" data-trim contenteditable>
+var foo = [0];
+foo == foo
+foo == !foo
+Math.min() < Math.max()
+typeof null
+undefined == null
+equality === 
+equality == 
+String("abc") instanceof String 
+1000 === 1E3
+						</code></pre>
+                        <aside class="notes">
+                            denial, anger, bargaining, depression
+                            equality == -> try to compare anything with everything and mostly take true
+                            (new String("abc")) instanceof String
+                        </aside>
+					</section>
+	                <section>
+	                    <h3><i class="fa fa-heart-o"></i> Stockholm syndrom <i class="fa fa-heart-o"></i></h3>
+	                    <ul>
+	                        <li>JS everywhere</li>
+	                        <li>Full Stack; eigentlich alle Technologien</li>
+	                        <ul>
+	                            <li>Audio/video www.youtube.com</li>
+	                            <li><a href="http://stars.chromeexperiments.com/" target="_blank">3D</a> stars.chromeexperiments.com, threejs.org</li>
+	                            <li>Datenbank postgreSQL, NoSQL</li>
+	                            <li><a href="http://www.quakejs.com/play?set%20fs_game%20cpma&set%20mode_start%20FFA&set%20g_teamAutoJoin%201&map%20cpm1a" target="_blank">Spiele</a></li>
+	                        </ul>
+	                    </ul>
+	                </section>
+				</section>
+
+				<section>
+					<section>
+						<h3>angular.js</h3>
+	                    <ul>
+	                        <li>von und für Google</li>
+	                        <li>JavaScript-Framework für WebApps und Single-Page-Applications</li>
+	                        <li>Open-Source seit Veröffentlichung 2009</li>
+	                        <li>Entwicklung einfacher und schneller werden (RAD); Krückstock ist hier nach wie vor das Gefumel mit CSS</li>
+	                        <li>Automatisierung von Standardaufgaben; dadurch kleinerer Code; Datenbindung ersetzt Selektoren</li>
+	                        <li>Testbarkeit durch Depency-Injection</li>
+	                        <li>Lizenz: MIT, damit in kommerziellen Produkten verwendbar</li>
+	                    </ul>
+					</section>
+                    <section>
+                        <h3>MV* - Model View whatever</h3>
+                        <ul>
+                        	<li>MVVM</li>
+                            <li>2005 von John Gossman (Microsoft MVP(Most Valuable Professional))</li>
+                            <li>Spezialisierung des Presentation Model von Martin Fowler</li>
+                            <li>Zustand und Verhalten der View in eigenes UI-Model (View Model)</li>
+                            <li>Unabhängig von der UI-Plattform was REST ermöglicht</li>
+                        </ul>
+                    </section>
+                    <section>
+                    	<img src="images/js-learning-curves.jpeg">
+                    </section>
+				</section>
+				
+				<section>
+                    <section>
+                        <h2>Bestandteile</h2>
+                        <img src="images/a-1-a-35.jpg">
+                    </section>
+
+                    <section>
+                        <h3>{{model}}</h3>
+                        <pre><code class="html" data-trim contenteditable>
+<input type="text" value="model='Interpolation {{model}}'"/>
+<input type="text" ng-model="model" ng-init="model='Interpolation {{model}}'"/>
+<button ng-click="model='Interpolation {{model}}'">Zurücksetzten</button>
+						</code></pre>
+						<aside class="notes">
+	                        <ul>
+	                            <li>!Killerfeature! Most important; Bidirektionale Bindung</li>
+	                            <li>Dev ändert Model angular View</li>
+	                            <li>alt händisch mit jquery und events</li>
+	                            <li>neu sync by angular</li>
+	                        </ul>
+						</aside>
+                    </section>
+
+                    <section>
+                        <h3>$scope</h3>
+
+                        <ul>
+                            <li>das eigentliche View-Model im MVVM</li>
+                            <li>scope ist glue zwischen controller und view</li>
+                            <li>hat nichts im service zu suchen</li>
+                            <li>ng-model hat eine Punkt, da der scope read only ist</li>
+                            <li>there is a $rootScope; don't dare you to touch it</li>
+                            <li>alle $scope's sind hirarchisch angeordnet unterhalb des $rootScope</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h3>Controller</h3>
+                        module.controller('controllerName', function );
+
+<pre><code ng-non-bindable><div ng-controller="firstCtrl">
+    <span>{{name}}</span>
+    <span ng-bind="name"></span>
+</div></code></pre>
+<pre><code ng-non-bindable>var firstCtrl = function($scope) {
+    $scope.name = 'Hello World!';
+}
+angular.controller('firstCtrl', firstCtrl);</code></pre>
+
+                        <ul>
+                            <li>Controller exportieren Daten</li>
+                            <li>Controller Methoden sind Prototyp-Methoden</li>
+                            <li>Controller definieren das Clientseitige ViewModel des MVVM-Patterns und stellen die benötigte Anzeigelogig.</li>
+                            <li>Erstellt einen neuen Scope</li>
+                            <li>der innerhalb des Tags gilt; Kapselung von $scope's</li>
+                            <li>ng-bind verhindert das Anzeigen der Vorlage, falls Daten noch nicht geladen sind</li>
+                            <li>Alternativ kann auch ng-bind verwendet werden. Die Befehle führen beide dazu, dass der Wert der Variable name angezeigt wird.</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h3>Direktiven</h3>
+                        module.directive('directiveName', function);
+
+<pre><code ng-non-bindable><input type="text" ng-model="model" ng-init="model='Interpolation {{model}}'"/></code></pre>
+
+                        <ul>
+                            <li>Normalisierung von providern ansprechen 'firstCtrl' wird in der View zu 'directive-name'</li>
+                            <li>Direktieven erlauben Zugriff auf DOM-Elemente um diese gezielt zu manipulieren</li>
+                            <li>Angular ermöglicht es, benutzerdefinierte HTML-Elemente und -Attribute, sogenannte Direktiven, zu erstellen.</li>
+                            <li>Um Elemente auszuwählen, verwendet AngularJS jQuery Light (jqLite), eine reduzierten Version von jQuery</li>
+                            <li>Die Lesbarkeit wird deutlich gesteigert durch semantische Benennung und Weglassen von Elementen, die nur der Gestaltung dienen</li>
+                            <li>Automatisches Entstehen von Komponenten, die sich sehr gut testen und wiederverwenden lassen</li>
+                            <li>Vordefinierte Direktiven erkennbar am ng-Namensraum Prefix</li>
+                            <li>Einbindung von jQuery im HTML-DOM ersetzt jQuery Light</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h3>Services</h3>
+                        module.service( 'serviceName', function );
+
+<pre><code ng-non-bindable>angular.service('firstSrv', function($resource) {
+    var cars = $resource('http://localhost/cars/:id', {id:@id});
+    var newBeatle = cars.get({id:'beatle'});
+});</code></pre>
+
+                        <ul>
+                            <li>Services sind das Business-Model</li>
+                            <li>Services bearbeiten Daten oder stellen diese Bereit</li>
+                            <li>Services sollten Stateless sein</li>
+                            <li>Services enthalten die Geschäftslogik und binden externe Ressourcen – etwa REST-Webservices – ein. Services werden als Singleton instanziiert.</li>
+                            <li>Um AJAX-Anfragen durchzuführen, stehen in AngularJS das $http-Objekt und das $resource-Objekt zur Verfügung.</li>
+                            <li>Service, Factory, Provider</li>
+                            <li>nicht im DOM sichtbar</li>
+                            <li>$http und $resource greifen intern auf das XMLHttpRequest-Objekt</li>
+                            <li>$http beliebige HTTP-Anfragen</li>
+                            <li>$resource auf REST-Services spezialisiert. @ nimmt Parameter vom Data-Objekt</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h3>Filter </h3>
+<pre><code ng-non-bindable><div ng-repeat="car in cars | orderBy:'licensePlate' | reverse">
+    {{car.licensePlate}}
+</div></code></pre>
+
+                        <ul>
+                            <li>Mit dem Pipe-Operator können Filter hinzugefügt werden, die sich auf das angezeigte Resultat auswirken</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h3>Dependency Injection</h3>
+
+<pre><code ng-non-bindable>['$scope', function apiTokenFactory($scope) {</code></pre>
+
+                    </section>
+
+
+                    <section>
+                        <h3>Broadcast/Emit</h3>
+                        <ul>
+                            <li>Kommunikation zwischen Scopes</li>
+                            <li>Jeder Controller besitzt ein eigenes $scope-Objekt, welches die zum Controller gehörigen Funktionen und Daten kapselt. Damit Controller mit anderen Controllern oder Services kommunizieren können, werden vom $scope- bzw. vom $rootScope-Objekt $emit- und $broadcast-Methoden zur Verfügung gestellt. Dabei dient $emit dazu, Nachrichten an alle übergeordneten Scopes zu senden, während $broadcast dazu dient, Nachrichten an untergeordnete Scopes zu senden</li>
+                            <li>Damit ein Controller oder ein Service auf eine Nachricht reagieren kann, muss er sich für die Nachricht mit Hilfe der $on-Methode für den Nachrichtentyp registrieren (Publish-Subscribe-Verfahren)</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h3>$digest</h3>
+                        <ul>
+                            <li>makes angular tick, tack, tock</li>
+                            <li>der Loop, der durch alle Watch-Espressions geht (auch EventListener) und diese ausführt</li>
+                            <li>$timeout besprechen</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h3>Promises</h3>
+                    </section>
+
+                    <section>
+                        <h3>Module</h3>
+                    </section>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Markdown support
+
+						Write content using inline or external Markdown.
+						Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
+
+						```
+						<section data-markdown>
+						  ## Markdown support
+
+						  Write content using inline or external Markdown.
+						  Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
+						</section>
+						```
+					</script>
+				</section>
+
+				<section>
+					<section id="fragments">
+						<h2>Fragments</h2>
+						<p>Hit the next arrow...</p>
+						<p class="fragment">... to step through ...</p>
+						<p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span class="fragment">slide.</span></p>
+
+						<aside class="notes">
+							This slide has fragments which are also stepped through in the notes window.
+						</aside>
+					</section>
+					<section>
+						<h2>Fragment Styles</h2>
+						<p>There's different types of fragments, like:</p>
+						<p class="fragment grow">grow</p>
+						<p class="fragment shrink">shrink</p>
+						<p class="fragment fade-out">fade-out</p>
+						<p class="fragment current-visible">current-visible</p>
+						<p class="fragment highlight-red">highlight-red</p>
+						<p class="fragment highlight-blue">highlight-blue</p>
+					</section>
+				</section>
+
+				<section id="transitions">
+					<h2>Transition Styles</h2>
+					<p>
+						You can select from different transitions, like: <br>
+						<a href="?transition=none#/transitions">None</a> -
+						<a href="?transition=fade#/transitions">Fade</a> -
+						<a href="?transition=slide#/transitions">Slide</a> -
+						<a href="?transition=convex#/transitions">Convex</a> -
+						<a href="?transition=concave#/transitions">Concave</a> -
+						<a href="?transition=zoom#/transitions">Zoom</a>
+					</p>
+				</section>
+
+				<section id="themes">
+					<h2>Themes</h2>
+					<p>
+						reveal.js comes with a few themes built in: <br>
+						<!-- Hacks to swap themes after the page has loaded. Not flexible and only intended for the reveal.js demo deck. -->
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/black.css'); return false;">Black (default)</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/white.css'); return false;">White</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/league.css'); return false;">League</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/sky.css'); return false;">Sky</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/beige.css'); return false;">Beige</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/simple.css'); return false;">Simple</a> <br>
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/serif.css'); return false;">Serif</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/blood.css'); return false;">Blood</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/night.css'); return false;">Night</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/moon.css'); return false;">Moon</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/solarized.css'); return false;">Solarized</a>
+					</p>
+				</section>
+
+				<section>
+					<section data-background="#dddddd">
+						<h2>Slide Backgrounds</h2>
+						<p>
+							Set <code>data-background="#dddddd"</code> on a slide to change the background color. All CSS color formats are supported.
+						</p>
+						<a href="#" class="navigate-down">
+							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
+						</a>
+					</section>
+					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png">
+						<h2>Image Backgrounds</h2>
+						<pre><code class="hljs">&lt;section data-background="image.png"&gt;</code></pre>
+					</section>
+					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png" data-background-repeat="repeat" data-background-size="100px">
+						<h2>Tiled Backgrounds</h2>
+						<pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;</code></pre>
+					</section>
+					<section data-background-video="https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm" data-background-color="#000000">
+						<div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+							<h2>Video Backgrounds</h2>
+							<pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background-video="video.mp4,video.webm"&gt;</code></pre>
+						</div>
+					</section>
+					<section data-background="http://i.giphy.com/90F8aUepslB84.gif">
+						<h2>... and GIFs!</h2>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
+					<h2>Background Transitions</h2>
+					<p>
+						Different background transitions are available via the backgroundTransition option. This one's called "zoom".
+					</p>
+					<pre><code class="hljs">Reveal.configure({ backgroundTransition: 'zoom' })</code></pre>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
+					<h2>Background Transitions</h2>
+					<p>
+						You can override background transitions per-slide.
+					</p>
+					<pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background-transition="zoom"&gt;</code></pre>
+				</section>
+
+				<section>
+					<h2>Pretty Code</h2>
+					<pre><code class="hljs" data-trim contenteditable>
+function linkify( selector ) {
+  if( supports3DTransforms ) {
+
+    var nodes = document.querySelectorAll( selector );
+
+    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
+      var node = nodes[i];
+
+      if( !node.className ) {
+        node.className += ' roll';
+      }
+    }
+  }
+}
+					</code></pre>
+					<p>Code syntax highlighting courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
+				</section>
+
+				<section>
+					<h2>Marvelous List</h2>
+					<ul>
+						<li>No order here</li>
+						<li>Or here</li>
+						<li>Or here</li>
+						<li>Or here</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Fantastic Ordered List</h2>
+					<ol>
+						<li>One is smaller than...</li>
+						<li>Two is smaller than...</li>
+						<li>Three!</li>
+					</ol>
+				</section>
+
+				<section>
+					<h2>Tabular Tables</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>Item</th>
+								<th>Value</th>
+								<th>Quantity</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Apples</td>
+								<td>$1</td>
+								<td>7</td>
+							</tr>
+							<tr>
+								<td>Lemonade</td>
+								<td>$2</td>
+								<td>18</td>
+							</tr>
+							<tr>
+								<td>Bread</td>
+								<td>$3</td>
+								<td>2</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+
+				<section>
+					<h2>Clever Quotes</h2>
+					<p>
+						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
+						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
+					</p>
+					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
+						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
+						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
+					</blockquote>
+				</section>
+
+				<section>
+					<h2>Intergalactic Interconnections</h2>
+					<p>
+						You can link between slides internally,
+						<a href="#/2/3">like this</a>.
+					</p>
+				</section>
+
+				<section>
+					<h2>Speaker View</h2>
+					<p>There's a <a href="https://github.com/hakimel/reveal.js#speaker-notes">speaker view</a>. It includes a timer, preview of the upcoming slide as well as your speaker notes.</p>
+					<p>Press the <em>S</em> key to try it out.</p>
+
+					<aside class="notes">
+						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
+					</aside>
+				</section>
+
+				<section>
+					<h2>Export to PDF</h2>
+					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, here's an example:</p>
+					<iframe src="https://www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				</section>
+
+				<section>
+					<h2>Global State</h2>
+					<p>
+						Set <code>data-state="something"</code> on a slide and <code>"something"</code>
+						will be added as a class to the document element when the slide is open. This lets you
+						apply broader style changes, like switching the page background.
+					</p>
+				</section>
+
+				<section data-state="customevent">
+					<h2>State Events</h2>
+					<p>
+						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
+					</p>
+					<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
+Reveal.addEventListener( 'customevent', function() {
+	console.log( '"customevent" has fired' );
+} );
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Take a Moment</h2>
+					<p>
+						Press B or . on your keyboard to pause the presentation. This is helpful when you're on stage and want to take distracting slides off the screen.
+					</p>
+				</section>
+
+				<section>
+					<h2>Much more</h2>
+					<ul>
+						<li>Right-to-left support</li>
+						<li><a href="https://github.com/hakimel/reveal.js#api">Extensive JavaScript API</a></li>
+						<li><a href="https://github.com/hakimel/reveal.js#auto-sliding">Auto-progression</a></li>
+						<li><a href="https://github.com/hakimel/reveal.js#parallax-background">Parallax backgrounds</a></li>
+						<li><a href="https://github.com/hakimel/reveal.js#keyboard-bindings">Custom keyboard bindings</a></li>
+					</ul>
+				</section>
+
+				<section style="text-align: left;">
+					<h1>THE END</h1>
+					<p>
+						- <a href="http://slides.com">Try the online editor</a> <br>
+						- <a href="https://github.com/hakimel/reveal.js">Source code &amp; documentation</a>
+					</p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="node_modules/reveal.js/lib/js/head.min.js"></script>
+		<script src="node_modules/reveal.js/js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				// controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'none', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'node_modules/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'node_modules/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'node_modules/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'node_modules/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'node_modules/reveal.js/plugin/zoom-js/zoom.js', async: true },
+					{ src: 'node_modules/reveal.js/plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

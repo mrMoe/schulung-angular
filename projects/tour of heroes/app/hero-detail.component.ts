@@ -11,7 +11,7 @@ import {HeroService} from './hero.service';
     styleUrls: ['app/hero-detail.component.css']
 })
 export class HeroDetailComponent implements OnInit {
-    hero: Hero = {};
+    hero: Hero = null; 
 
     constructor(
         private _heroService: HeroService,

@@ -9,7 +9,8 @@
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "typings": "typings",
-    "clean": "rimraf app/*.js app/*.map app/*.css",
+    "clean": "rimraf app/**/*.js app/**/*.map app/**/*.css .sass-cache",
+    "clean:all": "rimraf app/**/*.js app/**/*.map app/**/*.css .sass-cache node_modules typings",
     "compass": "compass compile",
     "compass:watch": "compass watch"
   },

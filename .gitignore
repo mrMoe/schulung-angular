@@ -3,6 +3,9 @@ node_modules/
 .sass-cache/
 typings/
 
+.hidden
+*.zip
+
 **/app/*.css
 **/app/*.js
 **/app/*.map

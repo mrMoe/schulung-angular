@@ -1,17 +1,17 @@
 import {Component} from 'angular2/core';
 import {RouteConfig, RouterOutlet} from 'angular2/router';
 
-import {TalksService} from './talks.service';
-import {TalksListComponent} from './talks-list.component';
+import {TalkService} from './talk.service';
+import {TalkListComponent} from './talk-list.component';
 import {TalkDetailComponent} from './talk-detail.component';
 
 @Component({
     template: `<router-outlet></router-outlet>`,
     directives: [RouterOutlet],
-    providers: [TalksService]
+    providers: [TalkService]
 })
 @RouteConfig([
-    {path: '/', name: 'TalksList', component: TalksListComponent, useAsDefault: true},
+    {path: '/', name: 'TalkList', component: TalkListComponent, useAsDefault: true},
     {path: '/:id', name: 'TalkDetail', component: TalkDetailComponent}
 ])
-export class TalksComponent {} 
+export class TalkComponent {} 

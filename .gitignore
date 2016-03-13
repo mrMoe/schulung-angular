@@ -6,10 +6,9 @@ typings/
 .hidden
 *.zip
 
-**/app/*.css
-**/app/*.js
-**/app/*.map
-!**/app/*.mock.js
+**/app/**/*.css
+**/app/**/*.js
+**/app/**/*.map
 
 *.suo
 *.user

@@ -14,12 +14,16 @@ export class TalkService {
 
     private _url = `${this._config.api.endpoint}/talks/talks.json`;
 
-    getTalks(): Observable<Talk[]> {
+    getTalks(): Observable<Talk> {
         return this._http.get(this._url)
             .retry(3)
-            .map(r => <Talk[]> r.json().data)
-            .delay(500)
+            //.delay(500)
+            .flatMap(r => r.json().data)
             .catch(this._handleError);
+    }
+
+    getTalk(id: string): Observable<Talk> {
+        return this.getTalks().single(x => x.id.toLowerCase() === id);
     }
     
     addTalk(talk: Talk): Observable<Talk> {

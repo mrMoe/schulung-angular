@@ -1,4 +1,5 @@
 import {Component, OnInit} from 'angular2/core';
+import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {FilterArrayPipe} from '../components/filter-array.pipe';
 
@@ -22,7 +23,7 @@ import {TalkService} from './talk.service';
             </thead>
             <tbody>
                 <tr *ngFor="#talk of talks | filter:search">
-                    <th scope="row"><a href="">{{talk.id}}</a></th>
+                    <th scope="row"><a [routerLink]="['TalkDetail', {id: talk.id.toLowerCase()}]">{{talk.id}}</a></th>
                     <td>{{talk.title}}</td>
                     <td>{{talk.caption}}</td>
                     <td>{{talk.speaker.name}}</td>
@@ -30,18 +31,19 @@ import {TalkService} from './talk.service';
             </tbody>
         </table>
     `,
+    directives: [ROUTER_DIRECTIVES],
     pipes: [FilterArrayPipe]
 })
 export class TalkListComponent implements OnInit {
     constructor(private _talkService: TalkService){}
     
-    talks: Talk[];
+    talks: Talk[] = [];
     error: string;
     search = { id: null, title: null, caption: null, speaker: {name: null}};
 
     ngOnInit() {
         this._talkService.getTalks().subscribe(
-            success => this.talks = success, 
-            error => this.error = error);
+            t => this.talks.push(t),
+            e => this.error = e);
     }
 }

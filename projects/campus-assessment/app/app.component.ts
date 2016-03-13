@@ -11,7 +11,7 @@ import {TalkComponent} from './talks/talk.component';
         <h1>{{config.title}}</h1>
         <nav class="navbar navbar-default">
             <ul class="nav navbar-nav">
-              <li [class.active]="router.isRouteActive(router.generate(['Talks']))"><a [routerLink]="['Talks']">Talks</a></li>
+              <li [class.active]="router.isRouteActive(router.generate(['Talks']))">   <a [routerLink]="['Talks']">Talks</a></li>
               <li [class.active]="router.isRouteActive(router.generate(['Speakers']))"><a [routerLink]="['Speakers']">Speakers</a></li>
             </ul>
         </nav>

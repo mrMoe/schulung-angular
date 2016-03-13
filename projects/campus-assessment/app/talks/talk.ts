@@ -4,6 +4,10 @@ export class Speaker {
         public email: string,
         public company: string
     ) {}
+
+    toString(): string { // TODO override not working
+        return `${this.name} <${this.email}> from ${this.company}`
+    }
 }
 
 export class Talk {

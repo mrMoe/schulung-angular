@@ -1,9 +1,15 @@
+talk.component.js
+talk.component.js.map
 talk-detail.component.js
 talk-detail.component.js.map
 talk.js
 talk.js.map
+talk-list.component.js
+talk-list.component.js.map
 talks.component.js
 talks.component.js.map
+talk.service.js
+talk.service.js.map
 talks-list.component.js
 talks-list.component.js.map
 talks.service.js

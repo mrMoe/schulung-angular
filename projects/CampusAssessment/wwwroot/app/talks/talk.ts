@@ -15,6 +15,7 @@ export class Talk {
         public id: string,
         public title: string,
         public caption: string,
+        public text: string,
         public speakers: Speaker,
         public reviews: string[]
     ){}

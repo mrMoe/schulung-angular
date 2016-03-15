@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "font-awesome": "latest",
-    "reveal.js": "latest"
+    "reveal.js": "latest",
+    "lite-server": "latest"
   }
 }

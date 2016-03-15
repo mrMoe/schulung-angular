@@ -1,0 +1,472 @@
+https://angular.io/features.html
+https://angular.io/news.html
+https://angular.io/contribute.html
+visual studio hat zwar integration aber nur bis zu einem gewissen Grad...
+
+win7!!
+google chrome
+Visual Studio 2015 Community
+ASP.net 5
+ruby
+	compass
+nodejs
+    > npm install node-gyp -g
+    >npm install -g npm
+nodejs in externen webtools hinzufügen
+	c:\programme\nodejs
+	%appdata%\npm
+	ungetestet https://www.visualstudio.com/features/node-js-vs.aspx 
+neues projekt
+	asp.net-webanwendung
+	ASP.NET 5-Vorlagen: Web API
+index.html in wwwroot erstellen
+Startup.cs>configure < app.UseDefaultFiles();
+ausgabe bower/npm öffnen
+in wwwroot (explizit nicht im Hauptverzeichnis, wegen html script imports)
+	erst tsconfig.json, typings.json
+	dann package.json
+warten auf die Wiederherstellung
+rechtsklick> ordner im explorer starten> cmd auf machen
+> npm install --save-dev rimraf
+> npm install bootstrap --save
+
+npm clean task hinzufügen
+Ordner zu chrome workspace hinzufügen
+cache abschalten
+> compass init
+compass anpassen
+	sourcemap hack :D
+main.sass innerhalb von app erstellen	
+vs2015 update einfach austricksen, wenn man package.json außerhalb aktualisiert
+npm start für compass anpassen
+2 neue npm skripte hinzufügen
+> npm install angular-material --save
+warum kein livereload? weil dann javascript change in time compiled wird
+eigenen direktivenprefix ansprechen!!
+	präfix verhindert kollisionen; in realität eigentlich keine Gefahr
+	bessere übereinstimmung lässt dateien leichter finden
+Unheimlicher overhead mit den ganzen imports, directives und provider arrays O_o...
+providers[] deklaration mach Singeltons
+keine  provider, factories, services, constants und values mehr
+kein Code im Constructor
+promise: don't call us; we call u
+alle Dateinamen klein
+
+
+npm focused 
+
+input value="{{hero.name}}" > input [(ngModel)]="{{hero.name}}" > input [(ngModel)]="hero.name"
+	eingehen auf Unterschied 1.x und 2.x mit two-way and one-way binding
+
+interface bevorzugen, da kein code generiert wird im vergleich zur klasse daher weniger overhead und nur zur typesavety
+
+Aufpassen es gibt sehr viele verschiedene Version von asp.net5 und dementsprechend unterschiedliche Doku; bei beta-8 gab es nen strukturbruch
+npm als build tool *awesome*
+
+http://docs.asp.net/en/latest/conceptual-overview/understanding-aspnet5-apps.html#the-project-json-file
+
+
+
+live-server nur fehler anzeigen
+wie kann man komponenten direkt stylen
+eslint??
+angular interpolation prevent null pointer exception
+was ist mit scope inheritance??
+event bus? broadcast, emit
+transclusion?
+
+
+keine jqery selektoren 
+	nur daten bearbeitung und angular macht die View
+	selektoren wandern aus dem js code direkt in die view, wodurch sie besser Stylebar werden. außerdem separation of concerns 
+
+livecycle hooks kemma doch aus asp.net
+
+template, metadata, Componente und Class ergeben ein Modul
+
+the good, the bad, the ugly
+Mich stört
+	man muss Abhängigkeiten mehrfach deklarieren: imports, directives/providers/Constructor array
+	DI war einfacher
+		registrierung im injector direkt bei erstellung
+Geil
+	Componenten bassierung
+	Kompackter Code
+	teilweise eine Datei	
+
+präsentation <- Architektur beschreibung
+
+geile Doku!!	
+
+beispiel für Componente > eigene Checkbox 
+
+das wichtigeste sind Direktiven/Componenten
+WYSIWYG-Entwicklung
+
+Our components are big consumers of services. They depend upon services to handle most chores. They don't fetch data from the server, they don't validate user input, they don't log directly to the console. They delegate such tasks to services. 
+A component's job is to enable the user experience and nothing more. It mediates between the view (rendered by the template) and the application logic (which often includes some notion of a "model"). A good component presents properties and methods for data binding. It delegates everything non-trivial to services.
+
+That's a bad idea for several reasons including
+Our component has to know how to create a HeroService. If we ever change the HeroService constructor, we'll have to find every place we create the service and fix it. Running around patching code is error prone and adds to the test burden.
+We create a new service each time we use "new". What if the service should cache heroes and share that cache with others? We couldn't do that.
+We're locking the AppComponent into a specific implementation of the HeroService. It will be hard to switch implementations for different scenarios. Can we operate offline? Will we need different mocked versions under test? Not easy.
+What if ... what if ... Hey, we've got work to do!
+We get it. Really we do. But it is so ridiculously easy to avoid these problems that there is no excuse for doing it wrong.
+
+chrome most basic and immediate feedback browser
+
+The #hero is a local template variable declaration. The # prefix declares a local variable name named hero.
+
+frage wer schon angular und/oder typescript erfahrung hat
+Typen sind nur zur Validierung und Sicherheit; man kann auch alles ohne Typing entwickeln 
+
+einen ordner für jeden Bereich/Componente
+leider muss man sich mit angular2 seine Struktur vorher überlegen, da Refactoring aufwändeig. Einfacher war angular1 mit grunt include-source
+
+DOM-Manipulation: Angular isn't showing and hiding the message. It is adding and removing the paragraph element from the DOM. That hardly matters here. It would matter a great deal from a performance perspective if we were conditionally including or excluding a big chunk of HTML with many data bindings.
+
+The (click) to the left of the equal sign identifies the button's click event as the target of the binding. The text within quotes on the right is the template statement in which we respond to the click event
+Strong typing reveals a serious problem with passing a DOM event into the method: too much awareness of template details, too little separation of concerns.
+
+Angular has a syntax feature called local template variables. These variables grant us direct access to an element. We declare a local template variable by preceding an identifier with a hash/pound character (#).
+The newHero template variable refers to the <input> element. We can use newHero from any sibling or child of the <input> element.
+
+Angular only updates the bindings (and therefore the screen) if we do something in response to asynchronous events such as keystrokes.
+ <input #box (keyup)="onKey(box.value)">
+
+ das ganze dom geschlonze im dom lassen; dom apis bleiben im dom
+je klarer die Schnittstellen e.g. kein $event.target.value sondern nur value als function parameter desto einfacher ist testen
+The component knows nothing about HTML or the DOM, which is the way we like it.
+import {Component} from 'angular2/core';
+@Component({
+  selector: 'little-tour',
+  template: `
+    <input #newHero
+      (keyup.enter)="addHero(newHero.value)"
+      (blur)="addHero(newHero.value); newHero.value='' ">
+    <button (click)=addHero(newHero.value)>Add</button>
+    <ul><li *ngFor="#hero of heroes">{{hero}}</li></ul>
+  `
+})
+export class LittleTourComponent {
+  heroes=['Windstorm', 'Bombasto', 'Magneta', 'Tornado'];
+  addHero(newHero:string) {
+    if (newHero) {
+      this.heroes.push(newHero);
+    }
+  }
+}
+
+
+<div class="container">
+    <h1>Hero Form</h1>
+    <form>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="alterEgo">Alter Ego</label>
+        <input type="text" class="form-control">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>
+npm install bootstrap --save
+
+alles ist hierarchisch aufgebaut, dadurch vererben sich provider
+providerregistrierung erstellt neuen service
+
+We recommend adding @Injectable() to every service class, even those that don't have dependencies and, therefore, do not technically require it. Here's why:
+Future proofing: No need to remember @Injectable when we add a dependency later.
+Consistency: All services follow the same rules, and we don't have to wonder why a decorator is missing.
+
+backticks erklären mit string.format
+
+app/app-config.ts (excerpt)
+
+export interface Config {
+  apiEndpoint: string,
+  title: string
+}
+
+export const CONFIG:Config = {
+  apiEndpoint: 'api.heroes.com',
+  title: 'Dependency Injection'
+};
+
+It's not Angular's fault. An interface is a TypeScript design-time artifact. JavaScript doesn't have interfaces. The TypeScript interface disappears from the generated JavaScript. There is no interface type information left for Angular to find at runtime.
+// Use string as provider token
+[provide('app.config', {useValue: CONFIG})]
+constructor(@Inject('app.config') private _config: Config){ }
+
+keiner hirarchische vererbung von scopes
+digest heißt jetzt event loop
+
+No visible side effects
+    A template expression should not change any application state other than the value of the target property.
+    This rule is essential to Angular's "unidirectional data flow" policy. We should never worry that reading a component value might change some other displayed value. The view should be stable throughout a single rendering pass.
+Quick execution
+    Angular executes template expressions more often than we think. They can be called after every keypress or mouse move. Expressions should finish quickly or the user experience may drag, especially on slower devices. Consider caching values computed from other values when the computation is expensive.
+Simplicity
+    Although it's possible to write quite complex template expressions, we really shouldn't.
+    A property name or method call should be the norm. An occasional Boolean negation (!) is OK. Otherwise, confine application and business logic to the component itself, where it will be easier to develop and test.
+Idempotence
+    An idempotent expression is ideal because it is free of side effects and improves Angular's change detection performance.
+    In Angular terms, an idempotent expression always returns exactly the same thing until one of its dependent values changes.
+    Dependent values should not change during a single turn of the event loop. If an idempotent expression returns a string or a number, it returns the same string or number when called twice in a row. If the expression returns an object (including a Date or Array), it returns the same object reference when called twice in a row.
+
+Attributes initialize DOM properties and then they are done. Property values can change; attribute values can't.    
+The HTML attribute and the DOM property are not the same thing, even when they have the same name.
+
+Direktiven sind Attribute
+Componenten sind tags
+
+es gibt keine elemente mehr und auch kein jquery O_o  viewChild and contentChild.
+Remember: All components are directives.
+Konzepte die gleichen nur heißt alles anders...
+
+property binding 
+    component to element/DOM
+    stick to data properties and to methods that return values and do no more.
+    @Input() decorator
+    one direction, from a component’s data property into a target element property
+    Angular translates those interpolations into the corresponding property bindings before rendering the view.
+    kommunikation zwischen parent and child
+
+attr, class, style binding
+    when there is no element property e.g. td.colspan, svg
+    [attr.colspan], [attr.path]
+    [class], [class.active]
+    [style.color], [style.fontSize.em]
+
+event binding
+    from Element/DOM to component
+    name between enclosing parentheses identifies the target event
+    Template statement side effects are not just OK, they are expected.
+    
+Two-way binding with NgModel
+    [()] = BANANA IN A BOX
+    Angular matches [(x)] to an x input property for property binding and an xChange output property
+    <input [value]="currentHero.firstName" (input)="currentHero.firstName=$event.target.value" >
+
+ngClass, ngStyle
+    mehrere Klassen
+    [ngClass]="setClasses()"
+    eigentlich eher ein property get als eine Function
+ngIf, ngSwitch    
+
+ngFor
+    <hero-detail *ngFor="#hero of heroes" [hero]="hero"></hero-detail>
+    schleife
+    index
+    last
+    
+
+* template expansion
+    <hero-detail *ngIf="currentHero" [hero]="currentHero"></hero-detail>
+    
+    <template [ngIf]="currentHero">
+        <hero-detail [hero]="currentHero"></hero-detail>
+    </template>
+
+Local template variables
+    A local template variable is a vehicle for moving data across element lines.
+    <template ngFor #hero [ngForOf]="heroes" [ngForTrackBy]="trackByHeroes">
+        <hero-detail [hero]="hero"></hero-detail>
+    </template>
+    
+    wenn componente vorhanden, dann setzt diese den Wert von #hero
+    sonst ist es das element
+
+Input and output properties    
+    The target of a binding is to the left of the =. The source is on the right of the =.    
+    We have limited access to members of a target directive. We can only bind to properties that are explicitly identified as inputs and outputs.
+    @Input()  hero: Hero;
+    @Output() deleteRequest = new EventEmitter<Hero>();
+    @Output('myClick') clicks = new EventEmitter<string>(); //  @Output(alias) propertyName = ...
+
+The pipe operator ( | ) former filter
+    {{ title | uppercase }}
+    {{currentHero | json}}
+
+The Elvis operator ( ?. ) and null property paths e.g. safe navigation operator
+    The current hero's name is {{currentHero?.firstName}}
+    The null hero's name is {{nullHero && nullHero.firstName}}
+    <div *ngIf="nullHero">The null hero's name is {{nullHero.firstName}}</div>
+    a?.b?.c?.d
+
+An Attribute directive changes the appearance or behavior of a DOM element.
+    Components              directive with template
+    Structural directives   The Structural directive changes the DOM layout by adding and removing DOM elements. NgFor and NgIf are two familiar examples.
+    Attribute directives    The Attribute directive changes the appearance or behavior of an element. The built-in NgStyle directive, for example, can change several element styles at the same time.
+    
+    import {Directive, ElementRef, Input} from 'angular2/core';
+    @Directive({
+        selector: '[myHighlight]'
+    })
+    export class HighlightDirective {
+        constructor(el: ElementRef) {
+        el.nativeElement.style.backgroundColor = 'yellow';
+        }
+    }
+    
+    However, we recommend picking a selector name with a prefix to ensure that it cannot conflict with any standard HTML attribute, now or in the future. There is also less risk of colliding with a third-party directive name when we give ours a prefix.
+    host: { //The host property refers to the DOM element that hosts our attribute directive, the <span> in our case.
+        '(mouseenter)': 'onMouseEnter()',
+        '(mouseleave)': 'onMouseLeave()'
+    }
+        We have to write the listeners correctly.
+        We must detach our listener when the directive is destroyed to avoid memory leaks.
+        We'd be talking to DOM API directly which, we learned, is something to avoid.
+        
+    export class HighlightDirective {
+        @Input('myHighlight') highlightColor: string;
+        @Input() set defaultColor(colorName:string){ this._defaultColor = colorName || this._defaultColor; }
+        private _defaultColor = 'red';
+        constructor(private el: ElementRef) { }
+        onMouseEnter() { this._highlight(this.highlightColor || this._defaultColor); }
+        onMouseLeave() { this._highlight(null); }
+        private _highlight(color:string) { this.el.nativeElement.style.backgroundColor = color; }
+    }
+    
+    the directive or component property was a binding source. A property is a source if it appears in the template expression to the right of the equals (=).
+    A property is a target when it appears in square brackets ([ ]) to the left of the equals (=) ... as it is does when we bind to the myHighlight property of the HighlightDirective,
+    
+Routing & Nested Routing
+    bootstrap(AppComponent, [
+        ROUTER_PROVIDERS
+    ]);
+    @Component({ ... })
+    @RouteConfig([
+        {path: '/crisis-center/...', name: 'CrisisCenter', component: CrisisListComponent},
+        {path:'/heroes',        name: 'Heroes',       component: HeroListComponent}
+    ])
+    export class AppComponent { }
+
+    routerCanDeactivate(next: ComponentInstruction, prev: ComponentInstruction) : any {
+        // Allow synchronous navigation (`true`) if no crisis or the crisis is unchanged.
+        if (!this.crisis || this.crisis.name === this.editName) {
+        return true;
+        }
+        // Otherwise ask the user with the dialog service and return its
+        // promise which resolves to true or false when the user decides
+        return this._dialog.confirm('Discard changes?');
+    }
+
+http
+    This is a golden rule: always delegate data access to a supporting service class.
+    http.get does not send the request just yet! This observable is cold which means the request won't go out until something subscribes to the observable. 
+    http.get method returns an Observable of HTTP Responses (Observable<Response>) from the RxJS library 
+    return this.http.get(this._heroesUrl)                .map(res => <Hero[]> res.json().data)                .catch(this.handleError);
+    RxJS ("Reactive Extensions")
+    import 'rxjs/Rx';// Add all operators to Observable
+    This is not Angular's own design. The Angular HTTP client follows the ES2015 specification for the response object returned by the Fetch function. That spec defines a json() method that parses the response body into a JavaScript object.
+    We shouldn't expect json() to return the heroes array directly. The server we're calling always wraps JSON results in an object with a data property. We have to unwrap it to get the heroes. This is conventional web api behavior, driven by security concerns.
+    addHero (name: string) : Observable<Hero>  {
+        let body = JSON.stringify({ name });
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.post(this._heroesUrl, body, options)                        .map(res =>  <Hero> res.json().data)                        .catch(this.handleError)
+    }
+    While promises may be more familiar, observables have many advantages. Don't rush to promises until you give observables a chance.
+    The less obvious but critical difference is that these two methods return very different results!
+    The promise-based then returns another promise. We can keep chaining more then and catch calls, getting a new promise each time.
+    The subscribe method returns a Subscription. A Subscription is not another Observable. It's the end of the line for observables. We can't call map on it or call subscribe again. The Subscription object has a different purpose, signified by its primary method, unsubscribe.
+    Learn more about observables to understand the implications and consequences of subscriptions.
+    items:Observable<string[]> = this._searchTermStream        .debounceTime(300)        .distinctUntilChanged()    .switchMap((term:string) => this._wikipediaService.search(term));
+    
+    https://github.com/Reactive-Extensions/RxJS/blob/master/doc/gettingstarted/categories.md
+    
+    Using observable streams gives us the benefit of greater flexibility when it comes to handling the responses coming from HTTP requests. For example, we have the potential of tapping into useful RxJS operators like retry so that a failed HTTP request is automatically re-sent, which is useful for cases where users have poor or intermittent network communication.
+    Same-origin Policy
+        For security reasons, web browsers block XHR calls to a remote server whose origin is different from the origin of the web page. The origin is the combination of URI scheme, hostname and port number. This is called the Same-origin Policy.
+        Modern browsers do allow XHR requests to servers from a different origin if the server supports the CORS protocol. If the server requires user credentials, we'll enable them in the request headers.
+        
+        
+pipe
+    AsyncPipe The Async pipe saves boilerplate in the component code. The component doesn't have to subscribe to the async data source, it doesn't extract the resolved values and expose them for binding, and (in the case of Observable stream sources like EventEmitter) the component doesn't have to unsubscribe when it is destroyed (a potent source of memory leaks).
+
+shadow DOM
+    encapsulation: ViewEncapsulation.Native
+    
+@Component({
+    host: {
+        'style': 'display: table; height: 100%',    
+ moduleId: module.id in the @Component         noch nicht mit systemjs?
+ @Component({
+  selector: "my-cmp",
+  template: `
+    <ng-content></ng-content>
+  `,
+  styles: [`
+    :host {
+      display: block;
+      border: 1px solid black;
+      min-height: 200px;
+    }
+  `]
+})
+export class MyCmp {}
+
+
+npm install jasmine-core --save-dev
+
+
+
+popup
+componente form-group label input
+CORS
+api pipe
+
+
+eingehen auf compass und sass
+
+
+var source = Rx.Observable.interval(100).take(10)
+    .map(x => x*2);
+source.subscribe(x => console.log(x))
+
+test
+    The tests are easy to find
+    We see at a glance if an application part lacks tests.
+    Nearby tests can teach us about how the part works; they express the developers intention and reveal how the developer thinks the part should behave under a variety of circumstances.
+    When we move the source (inevitable), we remember to move the test.
+    When we rename the source file (inevitable), we remember to rename the test file.
+
+
+why
+    klare schnittstelle
+    trennung von Markup und code -> paralleles Arbeiten von Designer und Entwickler
+        Designer kann elemente verändern ohne auf ID's rücksicht nehmen zu müssen
+    There is very little ritual or ceremony involved with standing up a model that participates in data-binding. You don’t have to derive from an existing object or explicitly declare your properties and dependencies  – for the most part, you can just pass something you already have to Angular and it just works.
+    Dependency handling; tracking and injecting dependencies for tests (swap services) and SPA (What namespace does it live in? Did I already spin up an instance?)
+    deklaratives markup reduce side effects 
+        weniger glue code
+        schell ersichtlich was passiert >In other words, you may have a lot of behaviors and animations that are wired up “behind the scenes” so it’s not apparent from looking at the form tags that any validation or transitions are taking place.
+        make it clear where data is being bound and what it is being bound
+    AngularJS Embraces ‘DD … Er, Testing
+        mag viele Test-Frameworks
+    Paralleles Entwickeln
+        da alles auf Komponenten aufbaut, können diese gleichzeitig von verschiedenen Entwicklern erstellt werden
+    Controls e.g. Directivs wiederverwendbar auch außerhalb
+        Directives are testable
+        Directives can be worked on in parallel
+        Directives enable a declarative way to extend the UI, rather than using code to wire up new constructs
+        Directives reduce ritual and ceremony
+        Directives participate in dependency injection
+    Manage State in parent Controller, Service
+    Das Web wird zum Computing Node
+        SPA's sind responsive ähnlich Native
+
+http://www.hirez.io/?utm_campaign=NG-Newsletter&utm_medium=email&utm_source=NG-Newsletter_137
+http://blog.ionic.io/angularjs-console/        
+    http://juristr.com/blog/2016/02/debugging-angular2-console/?utm_campaign=NG-Newsletter&utm_content=linkplug&utm_medium=email&utm_source=NG-Newsletter_137&utm_term=linkplug
+
+http://libscore.com/?#angular
+Meanwhile, Google’s Angular lead says they’ll also continue supporting Angular 1 for at least another year. “What we’ve said on that is we’re going to support Angular 1 until the majority of folks come over to Angular 2,” says Green Google’s engineering director for AngularJS.
+
+
+http://blog.thoughtram.io/angular/2016/02/22/angular-2-change-detection-explained.html?utm_campaign=NG-Newsletter&utm_medium=email&utm_source=NG-Newsletter_138
+http://victorsavkin.com/post/110170125256/change-detection-in-angular-2
+http://blog.thoughtram.io/angular/2016/02/01/zones-in-angular-2.html

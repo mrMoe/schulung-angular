@@ -129,7 +129,7 @@ Note:
     template:'...'
 })
 export class HeroDetailComponent {
-    @Input hero: Hero;
+    @Input() hero: Hero;
 }
 ```
 
@@ -152,7 +152,9 @@ export class HeroDetailComponent {
     template:'...'
 })
 export class HeroDetailComponent {
-    @Output deleteMe = new EventEmitter<Hero>();
+    @Output() deleteMe = new EventEmitter<Hero>();
+    
+    deleteMe.emit();
 }
 ```
 
@@ -163,7 +165,7 @@ export class HeroDetailComponent {
 - Spezialform von Interface 
 
 ```javascript
-[(x)] -> @Input x; @Output xChange
+[(x)] -> @Input() x; @Output() xChange
 ```
 ```HTML
 <input [(ngModel)]="heroName"> Event and property

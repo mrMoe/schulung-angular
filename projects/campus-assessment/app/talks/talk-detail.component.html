@@ -5,11 +5,18 @@
     <li class="list-group-item"><label>Redner:</label> {{talk?.speaker?.name}}</li>
 </ul>
 
+<ul class="list-group">
+    <li class="list-group-item" *ngFor="#review of talk?.reviews">{{review | json}}</li>
+</ul>
+
 <form #form="ngForm">
     <h2>Vortragsbewertung</h2>
 
     <div class="alert alert-success" *ngIf="saved">
         <strong>Gespeichert!</strong>
+    </div>
+    <div class="alert alert-danger" *ngIf="error">
+        <strong>Fehler!</strong> {{error}}
     </div>
 
     <div *ngIf="!saved">

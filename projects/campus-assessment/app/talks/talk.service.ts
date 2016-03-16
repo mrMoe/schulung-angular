@@ -16,22 +16,21 @@ export class TalkService {
 
     getTalks(): Observable<Talk> {
         return this._http.get(this._url)
-            .retry(3)
-            //.delay(500)
             .flatMap(r => r.json().data)
             .catch(this._handleError);
     }
 
     getTalk(id: string): Observable<Talk> {
-        return this.getTalks().single(x => x.id.toLowerCase() === id);
+        return this._http.get(`${this._url}/${id}`)
+            .map(r => r.json().data)
+            .catch(this._handleError);
     }
-    
-    addTalk(talk: Talk): Observable<Talk> {
-    
-        let data = JSON.stringify(talk);
 
-        return this._http.post(this._url, data, this._config.api.headers)
-            .map(r => <Talk> r.json().data)
+    addReview(talk: Talk, review) {
+        let data = JSON.stringify(review);
+
+        return this._http.post(`${this._url}/${talk.id}`, data, this._config.api.headers)
+            .map(r => r.json())
             .catch(this._handleError);
     }
     

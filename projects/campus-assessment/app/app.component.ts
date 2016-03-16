@@ -3,6 +3,7 @@ import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
 import {Title} from 'angular2/platform/browser';
 
 import {Config, CONFIG, APP_CONFIG} from './config';
+import {SpeakerComponent} from './speakers/speaker.component';
 import {TalkComponent} from './talks/talk.component';
 
 @Component({
@@ -29,7 +30,7 @@ import {TalkComponent} from './talks/talk.component';
 })
 @RouteConfig([
     {path: '/talks/...', name: 'Talks', component: TalkComponent, useAsDefault: true},
-    {path: '/speakers/...', name: 'Speakers', component: TalkComponent},
+    {path: '/speakers', name: 'Speakers', component: SpeakerComponent},
 ])
 export class AppComponent implements OnInit {
     constructor(

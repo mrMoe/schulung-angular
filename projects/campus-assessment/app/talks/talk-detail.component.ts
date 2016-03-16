@@ -25,13 +25,21 @@ export class TalkDetailComponent implements OnInit {
     talk: Talk = null;
     review = {};
     saved: boolean = false;
+    error = null;
 
     ngOnInit() {
         this._talkService.getTalk(this._routeParams.get('id')).subscribe(r => this.talk = r);
     }
 
     send() {
-        this.saved = true;
+        this._talkService.addReview(this.talk, this.review).subscribe(
+            t => {
+                this.talk = t;
+                this.review = {};
+                this.saved = true;
+            },
+            e => this.error = e
+        );
     }
     
     reset() {

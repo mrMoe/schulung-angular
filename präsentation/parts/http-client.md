@@ -1,6 +1,5 @@
 ## http-client 
 
-- Http client sample overview
 - Fetch data with http.get
 - RxJS Observable of HTTP Responses
 - Enabling RxJS Operators

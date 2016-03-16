@@ -1,8 +1,11 @@
 ## Misc
 
+- https://angular.io/docs/ts/latest/quickstart.html
+- https://github.com/johnpapa/angular-styleguide
 - debugging http://blog.ionic.io/angularjs-console/
-- libscore http://libscore.com/?#angular
 
 --
 
 ## The End
+
+<moritz.herrmann@redheads.de>

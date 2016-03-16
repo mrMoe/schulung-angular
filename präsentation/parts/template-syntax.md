@@ -86,6 +86,10 @@ Note:
  - Increment/decrement ++/--
  - bitwise & |
 
+```HTML
+<button (click)="setStyle('background:black;color:white')">BUTTON</h1>
+```
+
 --
  
 ### Data-binding

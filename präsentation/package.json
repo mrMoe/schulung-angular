@@ -6,5 +6,8 @@
     "font-awesome": "latest",
     "reveal.js": "latest",
     "lite-server": "latest"
+  },
+  "scripts": {
+    "start": "lite-server"
   }
 }

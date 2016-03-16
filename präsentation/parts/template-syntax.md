@@ -64,7 +64,7 @@ var string = `
 
 ```HTML
 <h1>{{ title }}</h1>
-[value}=" 1 + 1 "
+[value]=" 1 + 1 "
 Elvis lebt für den Null-Check {{current?.hero?.firstName}}
 ```
 
@@ -112,7 +112,7 @@ Note:
 --
 
 ### Property-Binding - One-Way IN
-- Setzten von Element Eigenschaften
+- Setzen von Element Eigenschaften
 - Ziel-Property steht in den Eckigen-Klammern []
 - zuerst wird nach nach einer Direktive gesucht dann Element-Property
 
@@ -153,8 +153,10 @@ export class HeroDetailComponent {
 })
 export class HeroDetailComponent {
     @Output() deleteMe = new EventEmitter<Hero>();
-    
-    deleteMe.emit();
+
+    delete() {
+        deleteMe.emit(payload);
+    }
 }
 ```
 

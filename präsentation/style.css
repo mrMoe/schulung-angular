@@ -1,1 +1,9 @@
  
+.reveal .slides section[data-markdown] {
+    margin-bottom:2em !important;
+}
+
+ 
+.reveal .slides section[data-markdown] ul {
+    //max-width: 50%;
+}

@@ -1,5 +1,0 @@
-## Optimierung
---
-### SEO
---
-### Best Practices

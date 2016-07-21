@@ -1,5 +1,0 @@
-## externe Quellen
---
-### Promises
---
-### REST 

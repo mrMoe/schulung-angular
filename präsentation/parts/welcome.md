@@ -1,4 +1,4 @@
-![angular.js](images/AngularJS-large.png) <!-- .element style="margin-bottom: 10px; width: 500px; display: block; margin:auto;" -->
+![angular.js](images/angular.svg) <!-- .element style="margin-bottom: 10px; width: 500px; display: block; margin:auto;border:none;box-shadow:none;" -->
 
 Note:
 - sehr persönliche erfahrungen
@@ -10,12 +10,8 @@ Note:
 
 --
 
-Moritz Herrmann
-<moritz.herrmann@redheads.de>
+Moritz Herrmann <moritz_herrmann@gmx.net>
 
-Softwareentwickler seit 2007
+Frank Goraus <frank.goraus@mathema.de>
 
-seit 2014 Redheads Ltd. Softwaredienstleistungen
-
-Siemens Mobility<br/>
-Aufbereitung von Fahrzeug-Sensordaten
+https://github.com/mrMoe/schulung-angular

@@ -1,9 +1,15 @@
- 
 .reveal .slides section[data-markdown] {
     margin-bottom:2em !important;
 }
 
- 
-.reveal .slides section[data-markdown] ul {
-    //max-width: 50%;
+.reveal ul {
+    display: block;
 }
+
+.reveal .reference  {
+    position: absolute;
+    bottom: -3em;
+    right: 0;
+    font-size: .5em;
+}
+

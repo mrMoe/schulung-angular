@@ -3,10 +3,9 @@
 -- 
 
 ### Javascript Sucks
-- WTF's <a href="http://jswtf.tumblr.com/">jswtf.tumblr.com</a>
 - Skurille Scoping-Regeln (var vergessen -> globale Variable)
 - Dynamische Sprache: <i style="color:blue;">this</i> ändert sich dauernd
-- Hat keine Klassen
+- hat keine Klassen
 - schlechte Tool-Unterstützung
 ```javascript
 var foo = [0]; foo == foo; foo == !foo;
@@ -18,6 +17,8 @@ equality ==
 String("abc") instanceof String 
 1000 === 1E3
 ```
+- WTF's <a href="http://jswtf.tumblr.com/">jswtf.tumblr.com</a>
+- hilarious WAT-Talk Gary Bernhardt https://www.destroyallsoftware.com/talks/wat
 
 Note:
 - denial, anger, bargaining, depression
@@ -29,7 +30,8 @@ Note:
 ### Stockholm syndrom
 
 - JS everywhere
-- Full Stack; eigentlich alle Technologien
+- Full Stack
+    - J2V8 D‑':
 - Server node.js
  - Audio/video www.youtube.com
  - <a href="http://stars.chromeexperiments.com/" target="_blank">3D</a> stars.chromeexperiments.com, threejs.org
@@ -89,7 +91,7 @@ Note:
 | EmberJS    | callback      | HTML Tag; UI only | Convention              |
 | React      | state machine | Mixin             | -                       |
 
-https://www.airpair.com/js/javascript-framework-comparison#3-community
+https://www.airpair.com/js/javascript-framework-comparison#3-community <!-- .element: class="reference" -->
 
 Note:
 - Callbacks: update every single call
@@ -105,13 +107,38 @@ Note:
 
 --
 
+### Why angular2?
+
+- edgy use cases $apply, $digest, $timeout
+- aufwändiger digest loop; teilweise recursiv -> zone.js
+- Binding checks in native code aus JIT^^
+- vermeided tree scanning: Observable Pattern, immutable.js (Facebook)
+- lazy-loading von Komponenten :D
+- nur ein DI Mechanismus: constructor
+
+http://blog.angular-university.io/introduction-to-angular2-the-main-goals/ <!-- .element: class="reference" -->
+
+--
+
+### Why angular2?
+
+- Bessere Integration in Web-Components: keine plain Attribute -> [src]
+- Support/Emulate Shadow-DOM
+- Server-Side-Rendering mit Angular Universal
+- besser Testbar
+- Migrations Pfad
+
+http://blog.angular-university.io/introduction-to-angular2-the-main-goals/ <!-- .element: class="reference" -->
+
+--
+
 ### Aufbau der Schulung
 - nur TypeScript
 - Was gibt's in Angular oder die graue Theorie
 - Erste Schritte oder wer hat's verstanden
 - Sleeves Up; Anbindung an Datendienste
 - Demo-Anwendung und was uns so einfällt
-- ausschlafen ^^
+- eat, sleep, hack, repeat^^
 
 --
 

@@ -1,22 +1,12 @@
-export class Speaker {
-    constructor(
-        public name: string,
-        public email: string,
-        public company: string
-    ) {}
-
-    toString(): string { // TODO override not working
-        return `${this.name} <${this.email}> from ${this.company}`
-    }
-}
+import {Speaker} from '../speakers/speaker';
 
 export class Talk {
     constructor (
-        public id: string,
-        public title: string,
-        public caption: string,
-        public text: string,
+        public id: String,
+        public title: String,
+        public caption: String,
+        public text: String,
         public speakers: Speaker,
-        public reviews: string[]
+        public reviews: String[]
     ){}
 }

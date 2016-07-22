@@ -1,5 +1,5 @@
-import {Component} from 'angular2/core';
-import {RouteConfig, RouterOutlet} from 'angular2/router';
+import {Component} from '@angular/core';
+import {RouteConfig, RouterOutlet} from '@angular/router';
 
 import {TalkService} from './talk.service';
 import {TalkListComponent} from './talk-list.component';

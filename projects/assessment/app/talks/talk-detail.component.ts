@@ -1,5 +1,5 @@
-import {Component, OnInit} from 'angular2/core';
-import {Router, RouteParams} from 'angular2/router';
+import {Component, OnInit} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
 
 import {Talk} from './talk';
 import {TalkService} from './talk.service';
@@ -18,9 +18,9 @@ import {TalkService} from './talk.service';
 export class TalkDetailComponent implements OnInit {
     constructor(
         private _router: Router,
-        private _routeParams: RouteParams,
+        private _route: ActivatedRoute,
         private _talkService: TalkService
-    ){}
+    ) { }
 
     talk: Talk = null;
     review = {};
@@ -28,21 +28,24 @@ export class TalkDetailComponent implements OnInit {
     error = null;
 
     ngOnInit() {
-        this._talkService.getTalk(this._routeParams.get('id')).subscribe(r => this.talk = r);
+        // this._route.params
+        //     .map(p => this._talkService.getTalk(p['id']))
+        //     .subscribe(t => this.talk = t);
     }
 
     send() {
-        this._talkService.addReview(this.talk, this.review).subscribe(
-            t => {
-                this.talk = t;
-                this.review = {};
-                this.saved = true;
-            },
-            e => this.error = e
-        );
+        // this._talkService.addReview(this.talk, this.review)
+        //     .subscribe(t => {
+        //         this.talk = t;
+        //         this.review = {};
+        //         this.saved = true;
+        //     }, e => this.error = e);
     }
-    
+
     reset() {
         this.review = {};
+    }
+    overview() {
+        this._router.navigate(['talks']);
     }
 }

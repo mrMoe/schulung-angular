@@ -1,6 +1,6 @@
-import {Component, OnInit} from 'angular2/core';
-import {RouteConfig, RouterOutlet, ROUTER_PROVIDERS} from 'angular2/router';
-import {HTTP_PROVIDERS} from 'angular2/http';
+import {Component, OnInit} from '@angular/core';
+import {RouteConfig, RouterOutlet, ROUTER_PROVIDERS} from '@angular/router';
+import {HTTP_PROVIDERS} from '@angular/http';
 
 import {TalkComponent} from './talks/talk.component';
 

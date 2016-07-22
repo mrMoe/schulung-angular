@@ -1,22 +1,28 @@
-import {OpaqueToken} from 'angular2/core';
-import {Headers, RequestOptions} from 'angular2/http';
+import { OpaqueToken }              from '@angular/core';
+import { Headers, RequestOptions }  from '@angular/http';
 
-export let APP_CONFIG = new OpaqueToken('app.config');
-
-export interface Api {
+interface Api {
     endpoint: string,
-    headers: RequestOptions,
+    options: RequestOptions,
 }
+
+const CONFIG: Config = {
+    api: {
+        endpoint: 'app',
+        options: new RequestOptions({
+            headers: new Headers({ 'Content-Type': 'application/json' })
+        })
+    },
+    title: 'Speaker assessment',
+};
+
+export let APP_CONFIG = 'app.config';
 
 export interface Config {
     api: Api,
     title: string
-}
-
-export const CONFIG: Config = {
-    api: {
-        endpoint: 'app',
-        headers: new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/json' }) })
-    },
-    title: 'Spring Campus 2016 assessment',
 };
+
+export const ConfigProviders = [
+    { provide: APP_CONFIG, useValue: CONFIG }
+];

@@ -1,41 +1,48 @@
-import {Injectable, Inject} from 'angular2/core';
-import {Http, Response, Headers, RequestOptions} from 'angular2/http';
-import {Observable} from 'rxjs/Observable';
+import { Injectable, Inject } from '@angular/core';
+import { Http, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 
-import {Config, CONFIG, APP_CONFIG} from '../config';
-import {Talk} from './talk';
+import { APP_CONFIG, Config } from '../config';
+import { Talk } from './talk';
 
 @Injectable()
 export class TalkService {
     constructor(
-        private _http: Http,
-        @Inject(APP_CONFIG) private _config: Config
-    ){}
+        @Inject(APP_CONFIG) private config: Config,
+        private http: Http
+    ) { }
 
-    private _url = `${this._config.api.endpoint}/talks/talks.json`;
+    private url = `${this.config.api.endpoint}/talks`;
 
-    getTalks(): Observable<Talk> {
-        return this._http.get(this._url)
-            .flatMap(r => r.json().data)
-            .catch(this._handleError);
+    getTalks(): Observable<Talk[]> {
+        return this.http.get(this.url)
+            .map(r => r.json().data)
+            .catch(this.handleError);
+        // .catch(this._handleError); // unspecific error -.-
     }
 
-    getTalk(id: string): Observable<Talk> {
-        return this._http.get(`${this._url}/${id}`)
-            .map(r => r.json().data)
-            .catch(this._handleError);
+    getTalk(id: String): Observable<Talk> {
+        return this.http.get(this.url)
+            .flatMap(x => x.json().data)
+            .filter((x: Talk) => x.id.toLowerCase() === id.toLowerCase())
+            .catch(this.handleError);
     }
 
     addReview(talk: Talk, review) {
-        let data = JSON.stringify(review);
+        let body = JSON.stringify(review);
 
-        return this._http.post(`${this._url}/${talk.id}`, data, this._config.api.headers)
-            .map(r => r.json())
-            .catch(this._handleError);
+        return this.http.post(`${this.url}/${talk.id}`, body, this.config.api.options)
+            .map(r => r.json().data)
+            .catch(this.handleError);
     }
-    
-    private _handleError(error: Response) {
-        console.error(error);
-        return Observable.throw(error.text() || 'Server error');
+
+    private handleError(error: any) {
+        let errMsg = (error.message)
+            ? error.message
+            : error.status
+                ? `${error.status} - ${error.statusText}`
+                : 'Server error';
+        console.error(errMsg);
+        return Observable.throw(errMsg);
     }
 } 

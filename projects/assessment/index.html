@@ -6,7 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-  <title>Angular 2 QuickStart</title>
+  <base href="/">
+
+  <title>Assessment</title>
 
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
@@ -20,8 +22,8 @@
   <!-- 2. Configure SystemJS -->
   <script src="systemjs.config.js"></script>
   <script>
-      System.import('app').catch(function(err){ console.error(err); });
-    </script>
+      System.import('app');
+  </script>
 </head>
 
 <!-- 3. Display the application -->

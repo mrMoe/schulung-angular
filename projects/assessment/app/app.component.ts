@@ -1,45 +1,38 @@
-import {Component, provide, Inject, OnInit} from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
-import {Title} from 'angular2/platform/browser';
+import { Component, provide, Inject, OnInit } from '@angular/core';
+import { ROUTER_DIRECTIVES } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
-import {Config, CONFIG, APP_CONFIG} from './config';
-import {SpeakerComponent} from './speakers/speaker.component';
-import {TalkComponent} from './talks/talk.component';
+import './rxjs.operators';
+
+import { APP_CONFIG, Config, ConfigProviders } from './config';
 
 @Component({
-    selector:'app',
+    selector: 'app',
     template: `
         <h1>{{config.title}}</h1>
         <nav class="navbar navbar-default">
             <ul class="nav navbar-nav">
-              <li [class.active]="router.isRouteActive(router.generate(['Talks']))">   <a [routerLink]="['Talks']">Talks</a></li>
-              <li [class.active]="router.isRouteActive(router.generate(['Speakers']))"><a [routerLink]="['Speakers']">Speakers</a></li>
+              <li [routerLinkActive]="['active']"><a [routerLink]="['/talks', {color:'lime'}]">Talks</a></li>
+              <li [routerLinkActive]="['active']"><a [routerLink]="['/speakers']">Speakers</a></li>
+              <li [routerLinkActive]="['active']"><a [routerLink]="['/login']">Login</a></li>
             </ul>
         </nav>
         <router-outlet></router-outlet>
     `,
-    host: {
-        class: 'container',
-        style: 'display: block;'
-    },
     directives: [ROUTER_DIRECTIVES],
     providers: [
-        Title, 
-        provide(APP_CONFIG, {useValue: CONFIG})
+        Title,
+        ConfigProviders
     ]
 })
-@RouteConfig([
-    {path: '/talks/...', name: 'Talks', component: TalkComponent, useAsDefault: true},
-    {path: '/speakers', name: 'Speakers', component: SpeakerComponent},
-])
+
 export class AppComponent implements OnInit {
     constructor(
         @Inject(APP_CONFIG) public config: Config,
-        public router: Router,
-        private _title: Title
-    ){}
+        private title: Title
+    ) { }
 
     ngOnInit() {
-        this._title.setTitle(this.config.title);
+        this.title.setTitle(this.config.title);
     }
 } 

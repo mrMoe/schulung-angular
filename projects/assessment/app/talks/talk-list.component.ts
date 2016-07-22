@@ -24,7 +24,7 @@ import {TalkService} from './talk.service';
             </thead>
             <tbody>
                 <tr *ngFor="let talk of talks | filter:search">
-                    <th scope="row"><a [routerLink]="['talks', talk.id.toLowerCase()]">{{talk.id}}</a></th>
+                    <th scope="row"><a [routerLink]="[talk.id.toLowerCase()]">{{talk.id}}</a></th>
                     <td>{{talk.title}}</td>
                     <td>{{talk.caption}}</td>
                     <td>{{talk.speaker.name}}</td>
@@ -44,8 +44,7 @@ export class TalkListComponent implements OnInit {
 
     ngOnInit() {
         // this.talks = this.talkService.getTalks();
-        this.talkService.getTalks().subscribe(
-            r => this.talks = r,
-            e => this.error = e);
+        this.talkService.getTalks()
+            .subscribe(r => this.talks = r, e => this.error = e);
     }
 }

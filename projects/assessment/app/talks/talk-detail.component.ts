@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 import {Talk} from './talk';
 import {TalkService} from './talk.service';
@@ -17,35 +18,37 @@ import {TalkService} from './talk.service';
 })
 export class TalkDetailComponent implements OnInit {
     constructor(
-        private _router: Router,
-        private _route: ActivatedRoute,
-        private _talkService: TalkService
+        private router: Router,
+        private route: ActivatedRoute,
+        private talkService: TalkService
     ) { }
 
-    talk: Talk = null;
+    talk: Talk;
     review = {};
     saved: boolean = false;
     error = null;
 
     ngOnInit() {
-        // this._route.params
-        //     .map(p => this._talkService.getTalk(p['id']))
-        //     .subscribe(t => this.talk = t);
+        this.route.params.subscribe(params => {
+            this.talkService.getTalk(params['id'])
+                .subscribe(t => this.talk = t, e => this.error = e);
+        });
     }
 
     send() {
-        // this._talkService.addReview(this.talk, this.review)
-        //     .subscribe(t => {
-        //         this.talk = t;
-        //         this.review = {};
-        //         this.saved = true;
-        //     }, e => this.error = e);
+        this.talk.reviews = this.talk.reviews || [];
+        this.talk.reviews.push(this.review);
+        this.talkService.save(this.talk)
+            .subscribe(() => {
+                this.review = {};
+                this.saved = true;
+            }, e => this.error = e);
     }
 
     reset() {
         this.review = {};
     }
     overview() {
-        this._router.navigate(['talks']);
+        this.router.navigate(['talks']);
     }
 }

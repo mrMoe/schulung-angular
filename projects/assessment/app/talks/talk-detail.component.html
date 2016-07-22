@@ -6,7 +6,7 @@
 </ul>
 
 <ul class="list-group">
-    <li class="list-group-item" *ngFor="#review of talk?.reviews">{{review | json}}</li>
+    <li class="list-group-item" *ngFor="let review of talk?.reviews">{{review | json}}</li>
 </ul>
 
 <form #form="ngForm">

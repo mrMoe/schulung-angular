@@ -12,9 +12,9 @@ import { APP_CONFIG, Config, ConfigProviders } from './config';
         <h1>{{config.title}}</h1>
         <nav class="navbar navbar-default">
             <ul class="nav navbar-nav">
-              <li [routerLinkActive]="['active']"><a [routerLink]="['/talks', {color:'lime'}]">Talks</a></li>
-              <li [routerLinkActive]="['active']"><a [routerLink]="['/speakers']">Speakers</a></li>
-              <li [routerLinkActive]="['active']"><a [routerLink]="['/login']">Login</a></li>
+              <li [routerLinkActive]="['active']"><a [routerLink]="['talks']">Talks</a></li>
+              <li [routerLinkActive]="['active']"><a [routerLink]="['speakers']">Speakers</a></li>
+              <li [routerLinkActive]="['active']"><a [routerLink]="['login']">Login</a></li>
             </ul>
         </nav>
         <router-outlet></router-outlet>

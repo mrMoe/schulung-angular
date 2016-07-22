@@ -16,23 +16,23 @@ export class TalkService {
 
     getTalks(): Observable<Talk[]> {
         return this.http.get(this.url)
+            .distinctUntilChanged()
             .map(r => r.json().data)
             .catch(this.handleError);
         // .catch(this._handleError); // unspecific error -.-
     }
 
     getTalk(id: String): Observable<Talk> {
-        return this.http.get(this.url)
-            .flatMap(x => x.json().data)
+        return this.getTalks() 
+            .flatMap(x => x )
             .filter((x: Talk) => x.id.toLowerCase() === id.toLowerCase())
             .catch(this.handleError);
     }
 
-    addReview(talk: Talk, review) {
-        let body = JSON.stringify(review);
+    save(talk: Talk) {
+        let body = JSON.stringify(talk);
 
         return this.http.post(`${this.url}/${talk.id}`, body, this.config.api.options)
-            .map(r => r.json().data)
             .catch(this.handleError);
     }
 

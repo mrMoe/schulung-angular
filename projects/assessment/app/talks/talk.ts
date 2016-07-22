@@ -7,6 +7,6 @@ export class Talk {
         public caption: String,
         public text: String,
         public speakers: Speaker,
-        public reviews: String[]
+        public reviews: {}[]
     ){}
 }

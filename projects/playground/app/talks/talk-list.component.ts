@@ -7,7 +7,7 @@ import {TalkTailComponent} from './talk-tail.component';
 
 @Component({
     template: `
-        <talk-tail *ngFor="#i of talks | async" [talk]="i"></talk-tail>
+        <talk-tail *ngFor="let i of talks | async" [talk]="i"></talk-tail>
     `,
     providers: [TalkService],
     directives: [TalkTailComponent],

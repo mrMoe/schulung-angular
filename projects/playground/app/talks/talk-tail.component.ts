@@ -1,16 +1,15 @@
-import {Component, Input} from '@angular/core';
-import {RouterLink, Router} from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 
 import {Talk} from './talk';
 
 @Component({
     selector: 'talk-tail',
     template: `
-<!--        <ul (click)="toggleWidth()" [style]="style">-->
-        <ul >
-            <li (click)="gotoDetail()"><label>Titel:</label> {{talk.title | slice:0:15}}</li>
+        <ul (click)="toggleWidth()" [style.background]="background">
+            <li (click)="gotoDetail()"><label>Titel:</label> {{talk.title}}</li>
             <li><label>Tagline:</label> {{talk.caption}}</li>
-            <li><a [routerLink]="['TalkDetail', {id: talk.id}]">Details</a></li>
+            <li><a [routerLink]="['/talks', {id: talk.id}]">Details</a></li>
         </ul>
     `,
     styles: [`
@@ -28,29 +27,29 @@ import {Talk} from './talk';
             overflow: hidden;
         }
     `],
-    directives: [RouterLink]
+    directives: [ROUTER_DIRECTIVES]
 })
 export class TalkTailComponent {
     @Input() talk: Talk;
 
     private toggled: boolean = false;
-    public style: String;
+    public background: String;
 
     constructor(
-        private _router: Router
+        private router: Router
     ) {}
 
     public toggleWidth() {
         if(this.toggled){
-            this.style = 'width:200px';
+            this.background = 'initial';
             this.toggled = false;
         } else {
-            this.style = 'width:100%';
+            this.background = 'silver';
             this.toggled = true;
         }
     }
 
     public gotoDetail() {
-        this._router.navigate(['TalkDetail', {id: this.talk.id}]);
+        this.router.navigate(['/talks', {id: this.talk.id}]);
     }
 }

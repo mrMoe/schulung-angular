@@ -1,4 +1,4 @@
-import {bootstrap} from '@angular/platform-browser';
+import { bootstrap }    from '@angular/platform-browser-dynamic';
 import {Component} from '@angular/core';
 
 @Component({
@@ -21,13 +21,13 @@ import {Component} from '@angular/core';
     `
 })
 export class AppComponent {
-    foo:String = 'background: lime;'; 
-    barfoo:String = `was ist in ${this.foo}`;
+    foo: String = 'background: lime;';
+    barfoo: String = `was ist in ${this.foo}`;
     model: String = 'Welt';
     array = ['Thomas', 'Moritz', 'Michael'];
     isDefined = true;
 
-    constructor(){
+    constructor() {
         setTimeout(() => this.foo = 'background: fuchsia;', 3000)
     }
 

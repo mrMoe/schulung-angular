@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {ROUTER_DIRECTIVES} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 import { FilterArrayPipe } from '../components/filter-array/filter-array.pipe';

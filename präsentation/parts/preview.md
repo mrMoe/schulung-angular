@@ -3,7 +3,7 @@
 -- 
 
 ### Javascript Sucks
-- Skurille Scoping-Regeln (var vergessen -> globale Variable)
+- Skurrile Scoping-Regeln (var vergessen -> globale Variable)
 - Dynamische Sprache: <i style="color:blue;">this</i> ändert sich dauernd
 - hat keine Klassen
 - schlechte Tool-Unterstützung
@@ -31,11 +31,11 @@ Note:
 
 - JS everywhere
 - Full Stack
-    - J2V8 D‑':
+    - J2V8 ... D‑':
 - Server node.js
- - Audio/video www.youtube.com
- - <a href="http://stars.chromeexperiments.com/" target="_blank">3D</a> stars.chromeexperiments.com, threejs.org
- - Datenbank postgreSQL, NoSQL
+ - Audio/video -  www.youtube.com
+ - <a href="http://stars.chromeexperiments.com/" target="_blank">3D</a> - stars.chromeexperiments.com, threejs.org
+ - Datenbank - postgreSQL, NoSQL
  - <a href="http://www.quakejs.com/play?set%20fs_game%20cpma&set%20mode_start%20FFA&set%20g_teamAutoJoin%201&map%20cpm1a" target="_blank">Spiele</a>
 
 --
@@ -112,7 +112,7 @@ Note:
 - edgy use cases $apply, $digest, $timeout
 - aufwändiger digest loop; teilweise recursiv -> zone.js
 - Binding checks in native code aus JIT^^
-- vermeided tree scanning: Observable Pattern, immutable.js (Facebook)
+- vermeidet tree scanning: Observable Pattern, immutable.js (Facebook)
 - lazy-loading von Komponenten :D
 - nur ein DI Mechanismus: constructor
 
@@ -125,8 +125,8 @@ http://blog.angular-university.io/introduction-to-angular2-the-main-goals/ <!-- 
 - Bessere Integration in Web-Components: keine plain Attribute -> [src]
 - Support/Emulate Shadow-DOM
 - Server-Side-Rendering mit Angular Universal
-- besser Testbar
-- Migrations Pfad
+- besser testbar
+- Migrations-Pfad
 
 http://blog.angular-university.io/introduction-to-angular2-the-main-goals/ <!-- .element: class="reference" -->
 
@@ -134,8 +134,8 @@ http://blog.angular-university.io/introduction-to-angular2-the-main-goals/ <!-- 
 
 ### Aufbau der Schulung
 - nur TypeScript
-- Was gibt's in Angular oder die graue Theorie
-- Erste Schritte oder wer hat's verstanden
+- Was gibt's in Angular (oder: Die graue Theorie)
+- Erste Schritte (oder: Wer hat's verstanden?)
 - Sleeves Up; Anbindung an Datendienste
 - Demo-Anwendung und was uns so einfällt
 - eat, sleep, hack, repeat^^

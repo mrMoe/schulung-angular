@@ -1,4 +1,4 @@
-## Froms
+## Forms
 
 - Template-Driven Forms
 - Create a Form component
@@ -14,8 +14,8 @@
 --
 
 ```javascript
-import {Component} from 'angular2/core';
-import {NgForm}    from 'angular2/common';
+import {Component} from '@angular/core';
+import {NgForm}    from '@angular/common';
 import { Hero }    from './hero';
 @Component({
   selector: 'hero-form',

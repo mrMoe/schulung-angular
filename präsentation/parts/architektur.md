@@ -13,24 +13,24 @@
 - Module können zu Bibliotheken zusammengeschlossen werden
 
 ```javascript
-app/app.component.ts
+app.component.ts
 export class AppComponent { }
 ```
 ```javascript
 import {AppComponent} from './app.component';
 ```
 ```javascript
-import {Component, provide} from 'angular2/core';
-import {Router} from 'angular2/router';
+import {Component, provide} from '@angular/core';
+import {Router} from '@angular/router';
 ```
 
 --
 
-### @Component
+### Component
 - Herscher über einen Seitenbereich
 - ehemals Direktiven
 - Verbinden Template, Style, Daten, Logik, Routing...
-- Haben einen Lifecyle (asp.net anyone^^)
+- Haben einen Lifecyle (asp.net anyone?^^)
 
 ```javascript
 export class TalkListComponent implements OnInit {
@@ -53,12 +53,13 @@ export class TalkListComponent implements OnInit {
 ### Template
 - Aussehen einer Komponente
 - wird bei größeren Templates in extra Datei hinterlegt
-- Außlagern hängt am eigenen Geschmak und an der Policy
+- Auslagern hängt am eigenen Geschmak und an der Policy
+  (steigert Lesbarkeit und trennt Markup von Funktionalität)
 - Kein Unterschied im Zugriff auf die Elemente
 
 ```javascript
-<tr *ngFor="#talk of talks | filter:search">
-    <th scope="row"><a [routerLink]="['TalkDetail', {id: talk.id.toLowerCase()}]">{{talk.id}}</a></th>
+<tr *ngFor="let talk of talks | filter:search">
+    <th scope="row"><a [routerLink]="['/talk-detail', talk.id.toLowerCase()]">{{talk.id}}</a></th>
     <td>{{talk.title}}</td>
     <td>{{talk.caption}}</td>
     <td>{{talk.speaker.name}}</td>
@@ -70,8 +71,8 @@ export class TalkListComponent implements OnInit {
 ### Metadata
 - Anweisungen wie angular eine Klasse zu erstellen hat
 - Ohne Metadata weiß angular nicht was zu tun ist
-- selector: Marker an dem eine neue Componente erstellt werden soll
-- template/Url: Template oder Adresse
+- selector: Marker an dem eine neue Komponente erstellt werden soll
+- template/templateUrl: Template oder Adresse
 - directives: Direktiven, die von dieser Komponente verwendet werden
 - providers: Verwendete Services die injected werden sollen
 
@@ -90,8 +91,8 @@ export class AppComponent implements OnInit { ...   }
 --
 
 ### Data Binding
-- es gibt 4 Arten von DataBinding
-- Interpolation: anzeige von Daten im Template
+Es gibt 4 Arten von DataBinding:
+- Interpolation: Anzeige von Daten im Template
 - Property Binding: füllt ein Element Property mit Daten
 - Event Binding: Gibt der Componente User-Daten zurück
 - Two-Way Binding: Füllt den Inhalt mit Werten aus dem Model und transportiert Änderungen zurück
@@ -99,8 +100,8 @@ export class AppComponent implements OnInit { ...   }
 
 ```javascript
 {{talk.name}}              interpolation    Component > Template
-[value]="model.alterEgo"   poperty Binding  Component > Template
-value="{{model.alterEgo}}" poperty Binding  Component > Template
+[value]="model.alterEgo"   property Binding  Component > Template
+value="{{model.alterEgo}}" property Binding  Component > Template
 (click)="send($event)"     event Binding    Component < Template
 [(ngModel)]="model.name"   two-way Binding  Component <> Template
 ```
@@ -113,7 +114,7 @@ value="{{model.alterEgo}}" poperty Binding  Component > Template
 - Attribute werden durch HTML definiert; Properties durch DOM
 - Änderungen im Binding werden nicht ins HTML übertragen
 - id hat 1:1 Mapping
-- collspan hat kein DOM-Mapping
+- colspan hat kein DOM-Mapping
 - textContent hat kein HTML-Mapping
 
 ```HTML
@@ -128,14 +129,14 @@ value="{{model.alterEgo}}" poperty Binding  Component > Template
 - Attribut-Direktiven verändern das Verhalten
 - Component's sind eigentlich spezielle Struktur-Direktiven
 - Anhand des Component-selector werden neue Componenten erstellt
-- Das macht der angular Injector; Kein erstellen von Hand
+- Das macht der angular Injector; kein Erstellen von Hand
 - Präfixe
 
 ```javascript
 <body>
     <talk-app></talk-app>
 </body>
-<div *ngFor="#hero of heroes"></div>
+<div *ngFor="let hero of heroes"></div>
 <hero-detail *ngIf="selectedHero"></hero-detail>
 <input [(ngModel)]="hero.name">
 ```
@@ -188,7 +189,7 @@ Note:
 - Zentrale Verwaltung von Instanzen
 - Erfüllen von Abhängigkeiten
 - Komponente bekommt Abhängigkeiten übergeben
-- Registrierung aller Komponente (controller, services, directives, filters...)
+- Registrierung aller Komponenten (controller, services, directives, filters...)
 
 ```javascript
 @Component({

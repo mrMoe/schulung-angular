@@ -9,6 +9,11 @@
 - Send data to the server
 - Add headers
 - Promises instead of observables
-http://blog.thoughtram.io/angular/2016/01/06/taking-advantage-of-observables-in-angular2.html
-http://blog.angular-university.io/functional-reactive-programming-for-angular-2-developers-rxjs-and-observables/
-https://coryrylan.com/blog/intro-to-rxjs-observables-and-angular-2
+
+--
+
+Observables?
+
+- http://blog.thoughtram.io/angular/2016/01/06/taking-advantage-of-observables-in-angular2.html
+- http://blog.angular-university.io/functional-reactive-programming-for-angular-2-developers-rxjs-and-observables/
+- https://coryrylan.com/blog/intro-to-rxjs-observables-and-angular-2

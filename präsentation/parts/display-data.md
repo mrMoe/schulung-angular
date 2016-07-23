@@ -7,8 +7,8 @@
 - Template hat multiline String backticks (`)
 
 ```javascript
-import {Component} from 'angular2/core';
-import {bootstrap} from 'angular2/platform/browser';
+import {Component} from '@angular/core';
+import {bootstrap} from '@angular/platform-browser-dynamic';
 
 @Component({
     selector:'app',
@@ -70,7 +70,7 @@ myHero = this.heroes[0];
 @Component({
     template: `
         <ul>
-            <li *ngFor="#talk of talks">{{ talk }}</li>
+            <li *ngFor="let talk of talks">{{ talk }}</li>
         </ul>
     `
 })

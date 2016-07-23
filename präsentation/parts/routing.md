@@ -4,56 +4,71 @@
 
 ### Routing aktivieren
 
+index.html:
 ```HTML
-<script src="node_modules/angular2/bundles/router.dev.js"></script>
-<base href="/">
+<head>
+    <base href="/">
+</head>
+```
+systemjs.config.js:
+```
+var ngPackageNames = [
+    ...
+    'router',
+    ...
+  ];
 ```
 
 --
 
 ### Router konfigurieren
-- in weitere Dateien aufteilen
-- Default Route
-
+- in Bootstrap aufnehmen
 ```
-@RouteConfig([
-    {path: '/talks', name: 'Talks', component: TalkListComponent, useAsDefault: true},
-    {path: '/talks/:id', name: 'TalkDetail', component: TalkDetailComponent}
-])
-export class AppComponent {}
+import {appRouterProviders} from './app.routes';
+bootstrap(AppComponent, [ appRouterProviders ]);
 ```
 
-```HTML
-template: `
-    <div class="container">
-        <router-outlet></router-outlet>
-    </div>
-`,
+--
+
+- Routen definieren
+
+app.routes:
+```
+import {provideRouter, RouterConfig} from '@angular/router';
+import {DashboardComponent} from './dashboard.component';
+import {DetailComponent} from './detail.component';
+
+const routes: RouterConfig = [
+    { path: 'dashboard', component: DashboardComponent },
+    { path: 'detail/:id', component: DetailComponent },
+    { path: '', redirectTo: '/dashboard', pathMatch: 'full' } ]
+
+export const appRouterProviders = [ provideRouter(routes) ];
+```
+
+app.component:
+```
+import {ROUTER_DIRECTIVES} from '@angular/router';
+
+template: ` ...
+            <router-outlet></router-outlet>
+            `,
+directives: [ROUTER_DIRECTIVES],
 ```
 
 --
 
 ### Navigation
 ```HTML
-<a [routerLink]="['TalkDetail', {id: talk.id.toLowerCase()}]">
-   {{talk.id}}</a>
-```
-
--- 
-
-### Nesting
-
-```
-@RouteConfig([
-    {path: '/talks/...', name: 'Talks', component: TalkComponent, useAsDefault: true},
-])
-export class AppComponent {}
+<a [routerLink]="['/dashboard']" routerLinkActive="active">Dashboard</a>
+<a [routerLink]="['/detail', talk.id.toLowerCase()]">{{talk.id}}</a>
 ```
 
 ```
-@RouteConfig([
-    {path: '/', name: 'TalkList', component: TalkListComponent, useAsDefault: true},
-    {path: '/:id', name: 'TalkDetail', component: TalkDetailComponent}
-])
-export class TalkComponent {}
+import {Router} from '@angular/router';
+
+    gotoDetail(hero: Hero) {
+        let link = ['/detail', hero.id];
+        this.router.navigate(link);
+    }
 ```

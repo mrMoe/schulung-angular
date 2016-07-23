@@ -1,4 +1,4 @@
-## Benutzer eingabe
+## Benutzer-Eingabe
 
 --
 

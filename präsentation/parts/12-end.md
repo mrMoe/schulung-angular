@@ -1,6 +1,7 @@
 ## Misc
 
 - https://angular.io/docs/ts/latest/quickstart.html
+- https://angular.io/docs/ts/latest/guide/cheatsheet.html
 - https://github.com/johnpapa/angular-styleguide
 - http://blog.ionic.io/angularjs-console/ (debugging)
 - https://angular-university.io/

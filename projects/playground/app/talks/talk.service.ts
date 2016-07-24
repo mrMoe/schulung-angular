@@ -15,7 +15,7 @@ export class TalkService {
             .map(x => x.json().data);
     }
 
-    public getTalk(id: String): Talk {
+    public getTalk(id: String): Observable<Talk> {
         return null;
         // return this._http.get('app/talks/talks.json')
         //     .flatMap(x => x.json().data)

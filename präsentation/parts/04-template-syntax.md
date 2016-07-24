@@ -52,7 +52,7 @@ var string = `
 --
 
 ### Template Expression
-- Wird im Property-Binding Verwenden und an Elemente, Componenten oder Direktiven gebunden
+- Wird im Property-Binding verwendet und an Elemente, Componenten oder Direktiven gebunden
 - auf der rechten Seite vom =
 - Context der Componente
 - Alles was Seiteneffekte auslöst geht nicht
@@ -77,11 +77,11 @@ Note:
 --
 
 ### Template Statement
-- Wird im Event-Binding Verwenden und durch Ereignisse von Elemente, Componenten oder Direktiven ausgelöst
+- Wird im Event-Binding verwendet und durch Ereignisse von Elementen, Componenten oder Direktiven ausgelöst
 - auf der rechten Seite vom =
 - Context der Componente
 - Hat Seiteneffekte da Event
-- hier geht auch Zuweisung und Chaining aber nicht
+- hier geht auch Zuweisung; Chaining aber nicht
  - new Operator
  - Increment/decrement ++/--
  - bitwise & |

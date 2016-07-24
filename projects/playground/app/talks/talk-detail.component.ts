@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {RouteParams} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 
 import {Talk} from './talk';
 import {TalkService} from './talk.service';
@@ -13,16 +13,20 @@ import {TalkService} from './talk.service';
         </ul>
     `    
 })
-export class TalkDetailComponent {
-    public talk: Talk = {};
+export class TalkDetailComponent implements OnInit {
+    public talk: Talk;
+    error = null;
 
     constructor(
-        private _talkService: TalkService,
-        private _routeParams: RouteParams
+        private router: Router,
+        private route: ActivatedRoute,
+        private _talkService: TalkService
     ){}
 
     ngOnInit() {
-        let id = this._routeParams.get('id');
-        this._talkService.getTalk(id).subscribe(x => this.talk = x);
+        this.route.params.subscribe(params => {
+            this._talkService.getTalk(params['id'])
+                .subscribe(t => this.talk = t, e => this.error = e);
+        });
     }
 }

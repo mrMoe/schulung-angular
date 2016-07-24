@@ -30,7 +30,7 @@ import {Router} from '@angular/router';
 - Herscher über einen Seitenbereich
 - ehemals Direktiven
 - Verbinden Template, Style, Daten, Logik, Routing...
-- Haben einen Lifecyle (asp.net anyone?^^)
+- Haben einen Lifecycle (asp.net anyone?^^)
 
 ```javascript
 export class TalkListComponent implements OnInit {

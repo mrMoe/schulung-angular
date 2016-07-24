@@ -72,3 +72,108 @@ import {Router} from '@angular/router';
         this.router.navigate(link);
     }
 ```
+
+-- 		
+
+### Nesting
+
+#### reine Routing-Komponente
+
+crisis-center.component
+```
+@Component({
+  template:  `
+    <h2>CRISIS CENTER</h2>
+    <router-outlet></router-outlet>
+  `,
+  directives: [ROUTER_DIRECTIVES],
+  providers:  [CrisisService]
+})
+export class CrisisCenterComponent { }
+```
+
+--
+
+#### "Kind-Routen"
+
+crisis-center.routes
+```
+export const crisisCenterRoutes: RouterConfig = [
+
+  ... //default route
+  
+  {
+    path: 'crisis-center',
+    component: CrisisCenterComponent,
+    children: [
+      { path: ':id',  component: CrisisDetailComponent },
+      { path: '',     component: CrisisListComponent }
+    ]
+  }
+];
+```
+
+--
+
+#### Routen für ganze Applikation zusammenführen
+
+app.routes
+```
+import { provideRouter, RouterConfig }  from '@angular/router';
+
+import { crisisCenterRoutes } from './crisis-center/crisis-center.routes';
+import { heroesRoutes }       from './heroes/heroes.routes';
+
+export const routes: RouterConfig = [
+  ...heroesRoutes,
+  ...crisisCenterRoutes
+];
+
+export const appRouterProviders = [
+  provideRouter(routes)
+];
+```
+
+--
+
+### Route Guards
+
+Erlaubt verschiedene Navigationszenarien:
+- Zugriffsschutz auf Pfade
+- mögliche Vorbedingungen (z.B. Prefetch) erfüllen
+- Speichern vor dem Verlassen?
+
+Arten von Guards:
+- CanActivate (zuletzt geprüft, top down)
+- CanDeactivate (zuerst geprüft, bottom up)
+
+- -> bei false sofort Abbruch
+- (asynchron möglich)
+
+--
+
+crisis-center.routes
+```
+{ path: 'admin', component: CrisisAdminComponent, canActivate: [AuthGuard] },
+```
+
+auth-guard.service
+```
+import { Injectable }          from '@angular/core';
+import { CanActivate, Router } from '@angular/router';
+import { AuthService }         from './auth.service';
+
+@Injectable()
+export class AuthGuard implements CanActivate {
+
+  constructor(private authService: AuthService, private router: Router) {}
+
+  canActivate() {
+    if (this.authService.isLoggedIn) { return true; }
+
+    this.router.navigate(['/login']);
+    return false;
+  }
+}
+```
+

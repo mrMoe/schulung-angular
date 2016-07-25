@@ -44,7 +44,7 @@ var string = `
 - Wenn eine Direktive vorhanden ist, setzt diese den Wert ansonsten ist es das Element
 
 ```HTML
-<input #name placeholder="name">
+<input #name value="Peter">
 {{name.value}}
 <button (click)="saveName(name.value)"
 ```
